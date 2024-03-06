@@ -1,8 +1,11 @@
+require('dotenv').config()
 const compression = require('compression')
 const express = require('express')
 const { default: helmet } = require('helmet')
 const morgan = require('morgan')
 const app = express()
+
+//console.log(`process::`, process.env);
 
 // init middlewares
 // Morgan dùng để detect các request, có 5 loại
@@ -20,7 +23,10 @@ app.use(compression())
 
 
 // init db
-
+// require('./dbs/init.mongodb.lv0')
+require('./dbs/init.mongodb')
+const {checkOverload} = require('./helpers/check.connect')
+//checkOverload()
 
 // init routes
 app.get('/', (req, res, next) => {
